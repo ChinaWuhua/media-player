@@ -2,7 +2,7 @@
   <div>
     <el-row :gutter="20">
       <template>
-        <el-col v-for="(item, index) in col_size" :span="layout_col">
+        <el-col v-for="(item, index) in col_size" :key="'col-'+index" :span="layout_col">
           <div class="inputButton" :class="{'focus': index == focus}" @click="toFocus(item, index)">
             <div>
               <span class="icon el-icon-folder-add"></span>
@@ -13,6 +13,9 @@
         </el-col>
       </template>
     </el-row>
+    <div class="toolsBox" v-show="focus != -1">
+      工具库
+    </div>
   </div>
 </template>
 
