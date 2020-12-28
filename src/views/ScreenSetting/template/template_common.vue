@@ -16,6 +16,7 @@
               <img v-if="item.type == 'pic'" :src="item.src" alt="预览图">
               <video 
                 v-else
+                controls
                 autoplay="autoplay"
                 height="100%">
                 <source src="http://mp42.china.com.cn/video_tide/video/2019/3/26/20193261553564949777_356.mp4" type="video/mp4">

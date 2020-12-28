@@ -99,7 +99,7 @@
       listClick (item) {
         switch (item.routeName) {
           case 'preview':
-            window.open('http://localhost:8080/#/preview'); break;
+            window.open('/#/preview'); break;
         }
       },
       entry (entry) { // 快捷入口

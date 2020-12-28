@@ -11,6 +11,8 @@
             <template v-if="item.type == 'video'">
               <video 
                 autoplay="autoplay"
+                controls
+                loop
                 height="100%">
                 <source src="http://mp42.china.com.cn/video_tide/video/2019/3/26/20193261553564949777_356.mp4" type="video/mp4">
                 浏览器不支持本视频，您可以选择使用其他终端观看。
@@ -51,9 +53,15 @@ export default {
     }
   },
   mounted() {
+    this.getInitData();
     this.keepFreashHandle();
   },
   methods: {
+    getInitData () {
+      let data = JSON.parse(localStorage.getItem("screenData"))
+      this.screenData = data.screenData
+      this.tableData = data.tableData
+    },
     keepFreashHandle () {
       this.keepFreash = setInterval(() =>{
         this.getRefreashData();
