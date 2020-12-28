@@ -1,6 +1,6 @@
 <template>
   <div>
-    <templateCommon :layout="layout"></templateCommon>
+    <templateCommon :layout="layout" ref="deviceConfig"></templateCommon>
   </div>
 </template>
 
@@ -19,7 +19,9 @@ export default {
 
   },
   methods: {
-    
+    getDataList () {
+      return this.$refs.deviceConfig.getDataList()
+    }
   },
 };
 </script>

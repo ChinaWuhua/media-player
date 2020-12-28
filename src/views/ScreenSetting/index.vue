@@ -62,8 +62,13 @@ export default {
   },
   methods: {
     save () {
+      let tableData = this.$refs.deviceConfig.getDataList()
+      let res = {
+        screenData: this.layoutList[this.active].screenData,
+        tableData
+      }
       localStorage.setItem("refreash", 'true')
-      localStorage.setItem("screenData", JSON.stringify(this.layoutList[this.active].screenData))
+      localStorage.setItem("screenData", JSON.stringify(res))
       this.$message({
         message: '保存成功',
         type: 'success'
@@ -133,7 +138,8 @@ export default {
 <style>
   /* template component style */
   .deviceComponent .inputButton {
-    height: 100px;
+    position: relative;
+    height: 180px;
     text-align: center;
     color: #999;
     display: flex;
@@ -165,6 +171,27 @@ export default {
   }
   .deviceComponent .focus .icon {
     color: #fff;
+  }
+  .mediaPreview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+    background: #000;
+    flex: 1;
+    flex-shrink: 1;
+  }
+  .mediaPreview img {
+    max-width: 100%;
+    max-height: 100%;
   }
   .screenParams {
     font-size: 14px;

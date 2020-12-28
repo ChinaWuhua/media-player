@@ -4,11 +4,11 @@
       <template>
         <div 
           class="mediaItem" 
-          v-for="(item, index) in col_size" 
+          v-for="(item, index) in r_data" 
           :key="'col-'+index"
           :style="style">
           <div class="mediaDetail">
-            <template v-if="index == 0">
+            <template v-if="item.type == 'video'">
               <video 
                 autoplay="autoplay"
                 height="100%">
@@ -16,7 +16,7 @@
                 浏览器不支持本视频，您可以选择使用其他终端观看。
               </video>
             </template>
-            <img v-else src="http://www.gz.gov.cn/img/0/265/265355/6926422.jpg" alt="测试图片">
+            <img v-else-if="item.type == 'pic'" src="http://www.gz.gov.cn/img/0/265/265355/6926422.jpg" alt="测试图片">
           </div>
         </div>
       </template>
@@ -32,6 +32,7 @@ export default {
       keepFreash: null,
       heartSpeed: 1000*5,
       screenData: null,
+      tableData: {},
     };
   },
   computed: {
@@ -45,6 +46,9 @@ export default {
       if (!this.screenData) return 0;
       return this.screenData.col * this.screenData.row;
     },
+    r_data () {
+      return this.tableData
+    }
   },
   mounted() {
     this.keepFreashHandle();
@@ -59,7 +63,9 @@ export default {
       let refreash = localStorage.getItem("refreash") || false; // 暂用浏览器缓存记录数据更新状态
       if (refreash == 'true') {
         localStorage.setItem("refreash", 'false')
-        this.screenData = JSON.parse(localStorage.getItem("screenData"))
+        let data = JSON.parse(localStorage.getItem("screenData"))
+        this.screenData = data.screenData
+        this.tableData = data.tableData
       }
     },
   },
