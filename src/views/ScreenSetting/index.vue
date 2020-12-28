@@ -197,4 +197,11 @@ export default {
     font-size: 14px;
     color: #ccc;
   }
+  .words {
+    color: #fff;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 </style>

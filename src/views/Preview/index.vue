@@ -19,6 +19,9 @@
               </video>
             </template>
             <img v-else-if="item.type == 'pic'" src="http://www.gz.gov.cn/img/0/265/265355/6926422.jpg" alt="测试图片">
+            <div v-else-if="item.type == 'words'" class="words" :style="fontStyle">
+              {{item.words}}
+            </div>
           </div>
         </div>
       </template>
@@ -121,5 +124,12 @@ export default {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+  }
+  .words {
+    color: #fff;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>
