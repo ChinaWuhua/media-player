@@ -44,21 +44,24 @@
                     label: '大厅显示屏', 
                     routeName: 'screens', 
                     params: {
-                      id: 'home-2-1'
+                      id: 'home-2-1',
+                      screen: '1920*1080',
                     }
                   },
                   { 
                     label: '电梯显示屏', 
                     routeName: 'screens', 
                     params: {
-                      id: 'home-2-2'
+                      id: 'home-2-2',
+                      screen: '720p',
                     }
                   },
                   { 
                     label: '楼道显示屏', 
                     routeName: 'screens', 
                     params: {
-                      id: 'home-2-3'
+                      id: 'home-2-3',
+                      screen: '350*800',
                     }
                   },
                 ]
@@ -105,7 +108,7 @@
           case 'screens':
             this.$router.replace({
               path: '/screens',
-              query: {id: entry.params.id, label: entry.label}
+              query: {id: entry.params.id, label: entry.label, screen: entry.params.screen}
             });
             break;
         }

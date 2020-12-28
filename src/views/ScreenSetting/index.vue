@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="deviceName">{{ deviceName }}</div>
+    <div class="deviceName">{{ deviceName }} <span class="screenParams">{{screen}}</span></div>
     <div class="device"> 
       <div class="deviceMsg">
         <template v-for="(item, index) in layoutList">
@@ -14,7 +14,7 @@
           <component :is="effectComponent" ref="deviceConfig"></component>
         </div>
         <div class="saveBtns">
-          <el-button type="primary">保存</el-button>
+          <el-button type="primary" @click="save">保存</el-button>
           <el-button type="warning">取消</el-button>
         </div>
       </div>
@@ -37,10 +37,10 @@ export default {
   data() {
     return {
       layoutList: [
-        {label: '1 x 1', value: '1_1'},
-        {label: '2 x 2', value: '2_2'},
-        {label: '3 x 3', value: '3_3'},
-        {label: '4 x 4', value: '4_4'},
+        {label: '1 x 1', value: '1_1', screenData: {col: 1, row: 1}},
+        {label: '2 x 2', value: '2_2', screenData: {col: 2, row: 2}},
+        {label: '3 x 3', value: '3_3', screenData: {col: 3, row: 3}},
+        {label: '4 x 4', value: '4_4', screenData: {col: 4, row: 4}},
       ],
       active: 0,
     };
@@ -48,6 +48,9 @@ export default {
   computed: {
     deviceName () {
       return this.$route.query.label
+    },
+    screen () {
+      return this.$route.query.screen
     },
     effectComponent () {
       let o = this.layoutList[this.active]
@@ -58,6 +61,14 @@ export default {
 
   },
   methods: {
+    save () {
+      localStorage.setItem("refreash", 'true')
+      localStorage.setItem("screenData", JSON.stringify(this.layoutList[this.active].screenData))
+      this.$message({
+        message: '保存成功',
+        type: 'success'
+      })
+    },
     chosedLayout (item, index) {
       this.active = index
     }
@@ -154,5 +165,9 @@ export default {
   }
   .deviceComponent .focus .icon {
     color: #fff;
+  }
+  .screenParams {
+    font-size: 14px;
+    color: #ccc;
   }
 </style>

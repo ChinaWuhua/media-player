@@ -14,7 +14,17 @@
       </template>
     </el-row>
     <div class="toolsBox" v-show="focus != -1">
-      工具库
+      <el-form ref="form" :inline="true" :model="form" label-width="80px">
+        <el-form-item label="选择图片">
+          <el-select v-model="form.text">
+            <el-option label="图片一" value="11"></el-option>
+            <el-option label="视频" value="22"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary">确定</el-button>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
@@ -39,10 +49,13 @@ export default {
   data() {
     return {
       focus: -1,
+      form: {
+        text: '',
+      },
     };
   },
   mounted() {
-
+    console.log('mounted')
   },
   methods: {
     toFocus (item, index) {
