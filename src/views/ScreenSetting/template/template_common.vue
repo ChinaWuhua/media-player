@@ -22,7 +22,7 @@
                 <source src="http://mp42.china.com.cn/video_tide/video/2019/3/26/20193261553564949777_356.mp4" type="video/mp4">
                 浏览器不支持本视频，您可以选择使用其他终端观看。
               </video>
-              <div v-else-if="item.type == 'words'" class="words" :style="fontStyle">
+              <div v-else-if="item.type == 'words'" class="words" :style="item.fontStyle">
                 {{item.words}}
               </div>
             </div>
@@ -39,7 +39,7 @@
             <el-option label="文字" value="words"></el-option>
           </el-select>
         </el-form-item>
-        <template v-if="form.mediaType == 'words'">
+        <span v-show="form.mediaType == 'words'">
           <el-form-item label="输入文字">
             <el-input placeholder="请输入文字" v-model="form.words" />
           </el-form-item>
@@ -50,7 +50,14 @@
               <el-option label="更大字体" value="40px"></el-option>
             </el-select>
           </el-form-item>
-        </template>
+          <el-form-item label="文字颜色">
+            <el-select v-model="fontStyle.color">
+              <el-option label="白色" value="white"></el-option>
+              <el-option label="红色" value="red"></el-option>
+              <el-option label="橙色" value="orange"></el-option>
+            </el-select>
+          </el-form-item>
+        </span>
         <el-form-item>
           <el-button type="primary" @click="confirm">确定</el-button>
         </el-form-item>
@@ -91,6 +98,7 @@ export default {
       tableData: [],
       fontStyle: {
         fontSize: '',
+        color: '',
       },
     };
   },
@@ -104,6 +112,8 @@ export default {
           name: 'col-' + i,
           type: '',
           src: '',
+          words: '',
+          fontStyle: null,
         })
       }
     },
@@ -127,8 +137,14 @@ export default {
           break;
         case 'words': 
           this.tableData[this.focus].words = this.form.words; 
+          this.tableData[this.focus].fontStyle = Object.assign({}, this.fontStyle);
+          this.clearFont()
           break;
       }
+    },
+    clearFont () {
+      this.form.words = '';
+      this.fontStyle.fontSize = '';
     },
     toFocus (item, index) {
       this.focus = index
@@ -144,5 +160,8 @@ export default {
 <style scoped>
   .el-row {
     margin-bottom: 20px;
+  }
+  .toolsBox {
+    margin-top: -12px;
   }
 </style>

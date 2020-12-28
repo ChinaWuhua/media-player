@@ -3,6 +3,7 @@
     <div class="deviceName">{{ deviceName }} <span class="screenParams">{{screen}}</span></div>
     <div class="device"> 
       <div class="deviceMsg">
+        <div class="deviceMsgTitle">布局选择</div>
         <template v-for="(item, index) in layoutList">
           <div class="layoutItem" :class="{'active': index == active}" @click="chosedLayout(item, index)">
             {{item.label}}
@@ -11,11 +12,12 @@
       </div>
       <div class="deviceParams">
         <div class="deviceComponent">
+          <div class="deviceComponentTitle">概览图</div>
           <component :is="effectComponent" ref="deviceConfig"></component>
-        </div>
-        <div class="saveBtns">
-          <el-button type="primary" @click="save">保存</el-button>
-          <el-button type="warning">取消</el-button>
+          <div class="saveBtns">
+            <el-button type="primary" @click="save">保存</el-button>
+            <el-button type="warning">取消</el-button>
+          </div>
         </div>
       </div>
     </div>
@@ -92,6 +94,21 @@ export default {
   .deviceMsg {
     width: 200px;
     flex-shrink: 1;
+    border: 1px solid #dfdfdf;
+  }
+  .deviceMsgTitle {
+    font-size: 14px;
+    color: #666;
+    padding: 8px 0;
+    text-align: center;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  .deviceComponentTitle {
+    font-size: 14px;
+    color: #666;
+    padding: 0 0 12px 0;
+    border-bottom: 1px solid #dfdfdf;
+    margin-bottom: 12px;
   }
   .deviceName {
     font-size: 16px;
@@ -108,24 +125,20 @@ export default {
     border-radius: 5px;
   }
   .layoutItem {
-    border: 1px solid #dfdfdf;
     padding: 8px 0;
     text-align: center;
     font-size: 14px;
     color: #666;
-    margin-top: 12px;
-    border-radius: 5px;
     cursor: pointer;
+    border-bottom: 1px solid #dfdfdf;
   }
   .layoutItem:hover {
-    color: #fff;
-    background: #409EFF;
-    border-color: #409EFF;
+    color: #409EFF;
+    background: #efefef;
   }
   .active {
-    color: #409EFF !important;
-    border-color: #409EFF !important;
-    background: #fff !important;
+    color: #fff !important;
+    background: #409EFF !important;
   }
   .layoutItem:first-child {
     margin: 0;
@@ -133,6 +146,8 @@ export default {
   .saveBtns {
     margin-top: 20px;
     text-align: right;
+    border-top: 1px solid #dfdfdf;
+    padding-top: 12px;
   }
 </style>
 <style>
